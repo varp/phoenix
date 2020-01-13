@@ -1,3 +1,4 @@
+☐ rewrite whole codebase using more ES6 features and ES6 linter
 ☐ can we switch/move app to another Space?
 ☐ resize windows in the current space on Dock revealing/hidding
 ☐ Open the first window of Chrome (maximaized); rest of all screen stacked by halves
@@ -10,4 +11,5 @@
 ☐ Show Activity Monitor on  HYPER + SHIFT + ESC
 ☐ Refactor helper classes's methods to be a `static`
 ☐ Add cyclic window switcher for app in current Space
+☐ Declarative confgiuration for whole project parts (app. shortcuts, spaces layout, base shortcuts, constants and etc.)
 
