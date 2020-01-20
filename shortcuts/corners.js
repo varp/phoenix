@@ -8,4 +8,6 @@ const corners = [
   ['a', HYPER, ['bottom-left']]
 ];
 
-(new EventDispatcher()).setHandlers((new WindowManager()).setFrame.bind(), corners);
+let wmCorners = new WindowManager();
+
+(new EventDispatcher()).setHandlers(wmCorners.setFrame.bind(wmCorners), corners);
