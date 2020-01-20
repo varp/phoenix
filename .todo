@@ -12,4 +12,6 @@
 ☐ Refactor helper classes's methods to be a `static`
 ☐ Add cyclic window switcher for app in current Space
 ☐ Declarative confgiuration for whole project parts (app. shortcuts, spaces layout, base shortcuts, constants and etc.)
+☐ Plug ESLint to the development proccess
+☐ Some king of Acceptance testing
 
