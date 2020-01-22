@@ -38,6 +38,11 @@ class AppManager {
             return;
         }
 
+
+        if (!app.isActive()) {
+            app.activate();
+        }
+
         if (app.isHidden()) {
             app.show();
         }

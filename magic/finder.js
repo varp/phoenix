@@ -17,9 +17,9 @@ function magicFinderOpen(window) {
 
   if (!/Finder/.test(name)) return;
 
-  if (!title || /(Quick Look)|(About Finder)|(Finder Preferences)|(Info$)/.test(title)) return;
+  if (!title || /(Quick Look)|(About Finder)|(Finder Preferences)|(Info$)|(Volume)/.test(title)) return;
 
-  window.focus();
   window.maximize();
+  window.focus();
 
 }
