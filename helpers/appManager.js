@@ -34,10 +34,14 @@ class AppManager {
         }
 
         if (typeof app === 'undefined') {
-            (new Alert()).show(`Can not launch the '${appName}' application.`, App.get('Phoenix').icon())
+            (new Alert()).show(`Can not launch the '${appName}' application.`, App.get('Phoenix').icon());
             return;
         }
 
+        let isAppActive = app.isActive(),
+            isAppHidden = app.isHidden(),
+            appWindows = app.windows(),
+            appMainWindow = app.mainWindow();
 
         if (!app.isActive()) {
             app.activate();
@@ -47,45 +51,17 @@ class AppManager {
             app.show();
         }
 
+        Logger.log(`switchToApp app - ${appName} active - ${isAppActive} hidden - ${isAppHidden}`);
 
 
-        Logger.log('switchToApp', 'app', app.name(), {
-            isActive: app.isActive(),
-            isHidden: app.isHidden(),
-        });
+        let res = app.focus();
+        Logger.log(`switchToApp app - ${appName} result of focusing to the app - ${res}`);
 
-
-        // if (app.bundleIdentifier() == 'com.apple.finder') {
-        //     let window;
-
-
-        //     if (app.windows().length > 1) {
-        //         window = app.windows()[0];
-        //         Logger.log('switchToApp', 'app', app.name(), 'window', {
-        //             isVisible: window.isVisible(),
-        //             isMain: window.isMain(),
-        //             isNormal: window.isNormal()
-        //         });
-        //     }
-
-
-
-        //     let cmd = new Cmd();
-        //     if (window && window.title() !== '') {
-        //         app.focus();
-        //         window.raise();
-        //     } else {
-        //         cmd.osascript(`
-        //             tell application "Finder"
-        //                 make new Finder window to (path to home folder)
-        //                 activate
-        //             end tell
-        //         `);
-        //     }
-        // }
-
-        return app.focus();
-
+        if (appWindows.length === 0) {
+            // TODO: open an issue for the inability to focus the app main window due to tccd daemons incorrect interaction
+            res = appMainWindow.focus();
+            Logger.log(`switchToApp app - ${appName} result of focusing to the app's main window - ${res}`);
+        }
 
     }
 

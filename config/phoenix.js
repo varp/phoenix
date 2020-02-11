@@ -1,7 +1,7 @@
 
 /* CONFIG */
 
-Phoenix.set ({
+Phoenix.set({
   daemon: true,
   openAtLogin: true
 });
