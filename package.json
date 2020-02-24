@@ -1,6 +1,6 @@
 {
   "name": "phoenix-config",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "author": {
     "name": "Vardan Pogosian",
     "email": "me@vardan.pro"
@@ -8,8 +8,11 @@
   "license": "MIT",
   "main": "phoenix.js",
   "devDependencies": {
+    "@types/lodash": "^4.14.149",
     "@types/phoenix": "github:mafredri/phoenix-typings#master",
-    "jshint": "^2.11.0-rc1",
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.20.0",
+    "eslint": "^6.8.0",
     "node": "^11.5.0",
     "typescript": "^3.7.4"
   },

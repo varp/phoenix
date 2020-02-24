@@ -1,5 +1,4 @@
 
-
 /* IMPORT */
 
 require('./config/phoenix.js');
@@ -43,6 +42,6 @@ require('./magic/vscode.js');
 
 /* LOADED */
 
-/** @global App */
+/** @global App, Alert */
 (new Alert()).show('', App.get('Phoenix').icon());
 

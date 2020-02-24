@@ -1,29 +1,35 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "module": "commonjs",
-    "outDir": ".vscode/ts",
-    "target": "es2015",
-    "strict": true,
-    "moduleResolution": "node",
+    "module": "System",
+    "target": "ES6",
+    "strict": false,
+    "moduleResolution": "Node",
+    "sourceMap": true,
+    "listFiles": true,
+    "declaration": true,
     "typeRoots": [
-      "node_modules/@types",
+      "./node_modules/@types",
     ],
     "lib": [
-      "ES2018"
-    ]
+      "ES6"
+    ],
+    "outFile": "./dist/phoenix.js",
+    "rootDirs": [
+      "./config",
+      "./helpers",
+      "./magic",
+      "./shortcuts",
+    ],
   },
-  "include": [
-    "./config/*.js",
-    "./helpers/*.js",
-    "./magic/*.js",
-    "./shortcuts/*.js",
-    "./spaces/*.js"
-  ],
+  "typeAcquisition": {
+    "enable": true
+  },
   "files": [
-    "./phoenix.js",
+    "./phoenix.js"
   ],
   "exclude": [
-    "node_modules"
+    "./node_modules",
+    "./dist",
   ]
 }

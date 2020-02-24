@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 
-const VERSION = 'phoenix-config v0.0.1';
+const VERSION = 'phoenix-config v0.0.3';
 
 
 const DEBUG_MODE_KEY = 'PHOENIX_DEBUG_CONFIG';
