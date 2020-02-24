@@ -9,14 +9,25 @@ const switchers = [
   ['C', HYPER_SHIFT, ['Google Chrome Canary', true, 'com.google.Chrome.canary']],
   ['T', HYPER, ['iTerm']],
   ['P', HYPER, ['PhpStorm']],
-  ['F', HYPER, ['Finder', true, 'com.apple.finder']],
   ['P', HYPER_SHIFT, ['GoLand']],
   ['V', HYPER, ['Code']],
   ['R', HYPER, ['Microsoft Remote Desktop']],
   ['f12', HYPER, ['Activity Monitor']]
 ];
+
+const repetitiveSwitchers = [
+  ['F', HYPER, ['Finder', true, 'com.apple.finder']],
+];
+
+let appManager = AppManager.instance;
+
 const handler = (appName, launch, bid) => {
-  return (new AppManager()).switchToApp(appName, launch, bid);
+  return appManager.switchToApp(appName, launch, bid);
 };
 
-(new EventDispatcher()).setHandlers(handler, switchers);
+appManager.registerAppSwitcher('com.apple.finder', new FinderAppSwitcher());
+
+
+const ed = new EventDispatcher();
+ed.setHandlers(handler, switchers);
+ed.setHandlers(handler, repetitiveSwitchers, false);

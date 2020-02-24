@@ -10,7 +10,11 @@ require('./helpers/alert.js');
 require('./helpers/windowManager.js');
 require('./helpers/eventDispatcher.js');
 require('./helpers/spaceManager.js');
+
 require('./helpers/appManager.js');
+require('./helpers/appSwitchers/baseAppSwitcher.js');
+require('./helpers/appSwitchers/finder.js');
+
 require('./helpers/cmd.js');
 
 require('./shortcuts/center.js');

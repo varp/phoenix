@@ -1,25 +1,6 @@
 
 /* FINDER */
 
-(new EventDispatcher()).setEventHandler('windowDidOpen', magicFinderOpen);
+(new EventDispatcher()).setEventHandler('windowDidOpen', FinderAppSwitcher.layoutWindows);
 
-/* HELPERS */
-/** @param {Window} window  */
-function magicFinderOpen(window) {
-
-
-  Logger.log(window.app().name(), window);
-
-  if (!window.isNormal() || !window.isMain()) return;
-
-  const name = window.app().name(),
-    title = window.title();
-
-  if (!/Finder/.test(name)) return;
-
-  if (!title || /(Quick Look)|(About Finder)|(Finder Preferences)|(Info$)|(Volume)/.test(title)) return;
-
-  window.maximize();
-  window.focus();
-
-}
+(new EventDispatcher()).setEventHandler('windowDidOpen', FinderAppSwitcher.layoutWindowsSplitted);
