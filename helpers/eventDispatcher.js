@@ -3,7 +3,7 @@ class EventDispatcher {
 
     setEventHandler(event, handler) {
 
-        Logger.log(event, 'handlerName', handler.name);
+        Logger.log('EventDispatcher::setEventHandler', event, 'handlerName', handler.name);
 
         HANDLERS.push(Event.on(event, handler));
 
@@ -19,7 +19,7 @@ class EventDispatcher {
 
     setHandler(key, modifier, handler, handlerArgs = [], skipRepetitions = true) {
 
-        Logger.log(`${key} ${modifier}`, 'handlerName', handler.name);
+        Logger.log('EventDispatcher::setHandler', `${key} ${modifier}`, 'handlerName', handler.name);
 
         HANDLERS.push(Key.on(key, modifier, (identifier, repeated) => {
 
