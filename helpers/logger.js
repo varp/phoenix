@@ -11,7 +11,7 @@ class Logger {
   static log(...data) {
 
     if (Storage.get(DEBUG_MODE_KEY) === true) {
-      console.log(data);
+      console.log(...data);
       return;
     }
 
