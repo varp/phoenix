@@ -11,11 +11,10 @@ class Logger {
   static log(...data) {
 
     if (Storage.get(DEBUG_MODE_KEY) === true) {
+      data.unshift("DEBUG CONFIG");
       console.log(...data);
-      return;
+      Phoenix.log(...data);
     }
-
-    Phoenix.log(...data);
   }
 }
 
