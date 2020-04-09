@@ -1,4 +1,3 @@
-
 /* CONFIG */
 
 Phoenix.set({

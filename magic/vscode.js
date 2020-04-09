@@ -1,4 +1,3 @@
-
 /* VSCODE */
 (new EventDispatcher()).setEventHandler('windowDidOpen', magicVSCodeOpen);
 
@@ -11,10 +10,12 @@ function magicVSCodeOpen(window) {
   if (!/Code/.test(window.app().name())) return;
 
   Logger.log('magicVSCodeOpen', window.app().name(), {
-    isNormal: window.isNormal(), isMain: window.isMain()
+    isNormal: window.isNormal(),
+    isMain: window.isMain()
   }, window);
 
   // setFrame('extend', window);
   window.maximize();
+  window.focus();
 
 }

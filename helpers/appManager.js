@@ -3,6 +3,9 @@ let singletonEnforcer = Symbol();
 
 class AppManager {
 
+    /**
+     * @returns {AppManager}
+     */
     static get instance() {
 
         if (!this[singleton]) {
@@ -33,26 +36,34 @@ class AppManager {
     findApp(appName, bundleIdentifier = "") {
         let app = false;
 
-        if (bundleIdentifier !== "") {
-            App.all().filter(a => {
-                if (a.bundleIdentifier() === bundleIdentifier) {
-                    app = a;
-                    return app;
-                }
-            });
+        if (bundleIdentifier.length) {
+            app = _.first(App.all().filter(a => {
+                return a.bundleIdentifier() === bundleIdentifier
+            }), false);
+            Logger.log('AppManager::findApp', `by bundleId  - ${bundleIdentifier}, app - ${app}`);
             return app;
         }
 
         app = App.get(appName);
+        Logger.log('AppManager::findApp', `by appName  - ${appName}, app - ${app}`);
         return app;
     }
 
     switchToApp(appName, launch = true, bundleIdentifier = "") {
+        if (this._executeAppSwitcher(appName, launch, bundleIdentifier)) {
+            return;
+        }
 
+        return this.defaultAppSwitcher(appName, launch, bundleIdentifier);
+    }
+
+    defaultAppSwitcher(appName, launch, bundleIdentifier) {
         let app = this.findApp(appName, bundleIdentifier);
 
         if (!app && launch) {
-            app = App.launch(appName, { focus: true });
+            app = App.launch(appName, {
+                focus: true
+            });
         }
 
         if (typeof app === 'undefined') {
@@ -60,10 +71,6 @@ class AppManager {
             return;
         }
 
-
-        if (this.executeAppSwitcher(app)) {
-            return;
-        }
 
         let isAppActive = app.isActive(),
             isAppHidden = app.isHidden(),
@@ -85,14 +92,13 @@ class AppManager {
         Logger.log(`AppManager::switchToApp app - ${appName} result of focusing to the app - ${res}`);
 
         if (appWindows.length === 0) {
-            this.reopenApp(appName);
+            this._reopenApp(appName);
 
             Logger.log(`AppManager::switchToApp app - ${appName} result of focusing to the app's main window - ${res}`);
         }
-
     }
 
-    reopenApp(appName) {
+    _reopenApp(appName) {
         let script = `tell application "${appName}"
             try
                 reopen
@@ -108,17 +114,23 @@ class AppManager {
 
     }
 
-    registerAppSwitcher(bundleIdentifier, switcher) {
+    /**
+     * Register application switcher
+     * 
+     * @param {string} appIdentifierPattern 
+     * @param {Function} switcher 
+     */
+    registerAppSwitcher(appIdentifierPattern, switcher) {
         this.switchers = this.switchers || {};
-        this.switchers[bundleIdentifier] = switcher;
-        Logger.log('AppManager::registerAppSwitcher', `registered switcher for app with bundleIdentifier - ${bundleIdentifier}`);
+        this.switchers[appIdentifierPattern] = switcher;
+        Logger.log('AppManager::registerAppSwitcher', `registered switcher for app with bundleIdentifier - ${appIdentifierPattern}`);
     }
 
-    executeAppSwitcher(app) {
+    _executeAppSwitcher(appName, launch = true, bundleIdentifier = "") {
 
-        const bundleIdentifier = app.bundleIdentifier(),
-            switcher = this.switchers[bundleIdentifier];
-        if (switcher === undefined) {
+        let switcher = this._findAppSwitcher(appName, bundleIdentifier);
+
+        if (switcher === null) {
             return false;
         }
 
@@ -127,20 +139,36 @@ class AppManager {
         switch (typeof (switcher)) {
             case "function":
                 Logger.log('AppManager::registerAppSwitcher', `executing switcher for app with bundleIdentifier - ${bundleIdentifier}`);
-                switcher.call(this, app);
+                switcher.call(this, appName, launch, bundleIdentifier);
                 break;
             case "object":
                 if (!(switcher instanceof BaseAppSwitcher)) {
                     throw new TypeError("Custom switchers implemented as a class must be an instance of BaseAppSwitcher");
                 }
                 Logger.log('AppManager::registerAppSwitcher', `executing switcher for app with bundleIdentifier - ${bundleIdentifier}`);
-                switcher.switchToApp.call(switcher, app);
+                switcher.switchToApp.call(switcher, appName, launch, bundleIdentifier);
                 break;
             default:
                 throw new TypeError('invalid type of switcher');
         }
 
         return true;
+    }
+
+    _findAppSwitcher(appName, bundleIdentifier = "") {
+        let a = appName,
+            b = bundleIdentifier.length ? bundleIdentifier : null;
+
+        const predicate = (e) => {
+            let _e = e.replace('*', '');
+            return a.includes(_e) || (b && b.includes(_e))
+        };
+
+        const switcher = _.get(this.switchers, _.keys(this.switchers).sort().find(predicate), null);
+
+        Logger.log('AppManager::_findAppSwitcher()', `appName - ${a}, bundleId - ${b}, switcher - ${switcher}`)
+
+        return switcher;
     }
 
 }

@@ -23,11 +23,12 @@ class EventDispatcher {
 
         HANDLERS.push(Key.on(key, modifier, (identifier, repeated) => {
 
-            if (repeated && skipRepetitions) return;
+                if (repeated && skipRepetitions) return;
 
-            handler(...handlerArgs);
+                handler(...handlerArgs);
+            })
 
-        }));
+        );
 
     }
 

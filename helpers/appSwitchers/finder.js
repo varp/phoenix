@@ -1,39 +1,4 @@
-let _lastKeyPressTimestamp = 0;
-let _doubleKeyWasDetected = false;
-
-
 class FinderAppSwitcher extends BaseAppSwitcher {
-
-  static get doubleWasDetected() {
-    return _doubleKeyWasDetected;
-  }
-
-
-
-  static detectDoubleKey() {
-
-    const timestamp = Date.now();
-
-
-    Logger.log('FinderAppSwitcher::detectDoubleKey', `timestamp ${timestamp} - ${_lastKeyPressTimestamp}`);
-
-
-    const diff = timestamp - _lastKeyPressTimestamp;
-
-    Logger.log('FinderAppSwitcher::detectDoubleKey', `time passed between calls (ms) - ${diff}`);
-
-    if (diff <= DOUBLE_KEY_INTERVAL) {
-      Logger.log('FinderAppSwitcher::detectDoubleKey', `double was key detected`);
-      _lastKeyPressTimestamp = 0;
-      _doubleKeyWasDetected = true;
-      return _doubleKeyWasDetected;
-    }
-
-    _lastKeyPressTimestamp = timestamp;
-    _doubleKeyWasDetected = false;
-    return _doubleKeyWasDetected;
-
-  }
 
 
   static layoutWindowsSplitted(window) {
@@ -43,34 +8,48 @@ class FinderAppSwitcher extends BaseAppSwitcher {
     Logger.log('FinderAppSwitcher::layoutWindowsSplitted', window.app().name(), window);
 
 
-    let windows = window.app().windows().filter((v) => { return v.isNormal() || v.isMain(); });
-    FinderAppSwitcher._windows = windows.length >= 2 ? windows.slice(-2) : [];
+    let windows = window.app().windows().filter((v) => {
+      return v.isNormal() || v.isMain();
+    });
+    FinderAppSwitcher._windows = windows.length >= 2 ? windows.slice(-2) : windows;
 
     if (FinderAppSwitcher._windows.length === 2 && FinderAppSwitcher.doubleWasDetected) {
       const firstWindow = FinderAppSwitcher._windows[0];
       const secondWindow = FinderAppSwitcher._windows[1];
 
-      firstWindow.focus();
 
       const vm = new WindowManager();
       vm.setFrame('half-1', firstWindow);
       vm.setFrame('half-2', secondWindow);
+
+      firstWindow.raise()
+      firstWindow.focus();
+
     }
+
+    if (FinderAppSwitcher._windows.length < 2) {
+
+      Logger.log('FinderAppSwitcher::layoutWindows', window.app().name(), window);
+
+      window.maximize();
+      window.raise();
+      window.focus();
+    }
+
+
   }
 
-  static layoutWindows(window) {
-    if (!FinderAppSwitcher.filterWindows(window)) return;
+  static layoutWindows(app) {
+    let window = _.first(app.windows({
+      visible: true
+    }));
 
-    Logger.log('FinderAppSwitcher::layoutWindows', window.app().name(), window);
-
-    window.maximize();
-    window.focus();
-
+    FinderAppSwitcher.layoutWindowsSplitted(window);
   }
 
   static filterWindows(window) {
 
-    if (!window.isNormal() || !window.isMain()) return false;
+    if (!window || !window.isNormal() || !window.isMain()) return false;
 
     const name = window.app().name(),
       title = window.title();
@@ -82,8 +61,9 @@ class FinderAppSwitcher extends BaseAppSwitcher {
     return true;
   }
 
-  switchToApp(app) {
+  switchToApp(appName, launch = true, bundleIdentifier = "") {
 
+    super.switchToApp(appName, launch, bundleIdentifier);
 
     let script = `
       tell application "Finder"
@@ -111,12 +91,16 @@ class FinderAppSwitcher extends BaseAppSwitcher {
 
     // debugger;
 
-    FinderAppSwitcher.detectDoubleKey();
+
+    const layoutCallback = (task) => {
+
+      FinderAppSwitcher.layoutWindowsSplitted(AppManager.instance.findApp(appName, launch, bundleIdentifier).mainWindow());
+    };
 
     if (FinderAppSwitcher.doubleWasDetected) {
-      Cmd.osascript(doubleKeyScript);
+      Cmd.osascript(doubleKeyScript, layoutCallback);
     } else {
-      Cmd.osascript(script);
+      Cmd.osascript(script, layoutCallback);
     }
 
   }

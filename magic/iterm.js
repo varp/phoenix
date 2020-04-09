@@ -1,4 +1,4 @@
-/* TERMINAL */
+/* HYPER */
 
 (new EventDispatcher()).setEventHandler('windowDidOpen', (window) => {
 
@@ -7,8 +7,9 @@
   const name = window.app().name(),
     title = window.title();
 
-  if (!/Terminal/.test(name) || false) return;
+  if (!/iTerm/.test(name) || false) return;
 
-  (new WindowManager()).setFrame('bottom-right', window);
+  (new WindowManager()).setFrame('extend', window);
+  window.focus();
 
 });

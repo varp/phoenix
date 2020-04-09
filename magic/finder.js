@@ -1,6 +1,7 @@
-
 /* FINDER */
 
-(new EventDispatcher()).setEventHandler('windowDidOpen', FinderAppSwitcher.layoutWindows);
-
-(new EventDispatcher()).setEventHandler('windowDidOpen', FinderAppSwitcher.layoutWindowsSplitted);
+const edF = new EventDispatcher();
+// edF.setEventHandler('windowDidOpen', FinderAppSwitcher.layoutWindowsSplitted);
+edF.setEventHandler('windowDidClose', (w) => {
+  FinderAppSwitcher.layoutWindowsSplitted(w);
+});

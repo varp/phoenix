@@ -1,4 +1,3 @@
-
 /* CHROME */
 
 (new EventDispatcher()).setEventHandler('windowDidOpen', magicChromeOpen);
@@ -16,5 +15,6 @@ function magicChromeOpen(window) {
 
   // setFrame('extend', window);
   window.maximize();
+  window.focus();
 
 }
