@@ -1,31 +1,30 @@
-
 /* CENTER */
 
 (new EventDispatcher()).setHandler('x', HYPER, () => {
 
-  const window = Window.focused();
+    const window = Window.focused();
 
-  if (!window) return;
+    if (!window) return;
 
-  (new WindowManager()).centerWindow(window);
+    (new WindowManager()).centerWindow(window);
 
 });
 
 (new EventDispatcher()).setHandler('x', HYPER_SHIFT, () => {
 
-  const window = Window.focused();
+    const window = Window.focused();
 
-  if (!window) return;
+    if (!window) return;
 
-  const frame = window.frame();
+    const frame = window.frame();
 
-  window.setFrame({
-    x: frame.x,
-    y: frame.y,
-    width: CENTER_WIDTH,
-    height: CENTER_HEIGHT
-  });
+    window.setFrame({
+        x: frame.x,
+        y: frame.y,
+        width: CENTER_WIDTH,
+        height: CENTER_HEIGHT
+    });
 
-  (new WindowManager()).centerWindow(window);
+    (new WindowManager()).centerWindow(window);
 
 });
