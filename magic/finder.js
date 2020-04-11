@@ -3,5 +3,5 @@
 const edF = new EventDispatcher();
 // edF.setEventHandler('windowDidOpen', FinderAppSwitcher.layoutWindowsSplitted);
 edF.setEventHandler('windowDidClose', (w) => {
-  FinderAppSwitcher.layoutWindowsSplitted(w);
+    (new FinderAppSwitcher()).layoutWindowsSplitted(w);
 });

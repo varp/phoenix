@@ -1,4 +1,3 @@
-
 /* RELOAD */
 
 /** 
@@ -9,6 +8,6 @@
  *
  */
 (new EventDispatcher()).setHandler('R', HYPER_SHIFT, () => {
-  Phoenix.reload();
-  (new Alert()).show('', App.get('Phoenix').icon());
+    Phoenix.reload();
+    (new Alert()).show('', App.get('Phoenix').icon());
 });

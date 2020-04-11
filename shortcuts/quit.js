@@ -1,26 +1,25 @@
-
 /* QUIT */
 
 let lastQuitTimestamp = 0;
 
 (new EventDispatcher()).setHandler('q', ['cmd'], () => {
 
-  const timestamp = Date.now();
+    const timestamp = Date.now();
 
-  if (timestamp - lastQuitTimestamp <= DOUBLE_KEY_INTERVAL) {
+    if (timestamp - lastQuitTimestamp <= DOUBLE_KEY_INTERVAL) {
 
-    lastQuitTimestamp = 0;
+        lastQuitTimestamp = 0;
 
-    const app = App.focused();
+        const app = App.focused();
 
-    if (!app || _.includes(QUIT_BLACKLIST, app.name())) return;
+        if (!app || _.includes(QUIT_BLACKLIST, app.name())) return;
 
-    app.terminate();
+        app.terminate();
 
-  } else {
+    } else {
 
-    lastQuitTimestamp = timestamp;
+        lastQuitTimestamp = timestamp;
 
-  }
+    }
 
 });
