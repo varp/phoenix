@@ -18,7 +18,7 @@
     "./helpers/*.js",
     "./magic/*.js",
     "./shortcuts/*.js",
-    "./spaces/*.js"
+    "./spaces/*.js", "deprecated/focus.js"
   ],
   "files": [
     "./phoenix.js",

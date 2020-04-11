@@ -5,6 +5,7 @@ require('./config/constants.js');
 
 require('./helpers/logger.js');
 require('./helpers/alert.js');
+require('./helpers/doubleKeyDetector.js');
 require('./helpers/windowManager.js');
 require('./helpers/eventDispatcher.js');
 require('./helpers/spaceManager.js');

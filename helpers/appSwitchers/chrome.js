@@ -1,18 +1,24 @@
 class ChromeVersionsAppSwitcher extends BaseAppSwitcher {
+    constructor() {
+        super();
 
+        this._doubleKetDetector = new DoubleKeyDetector(this._switchToChrome);
+    }
 
-  switchToApp(appName, launch = true, bundleIdentifier = "") {
-    super.switchToApp(appName, launch, bundleIdentifier);
+    _switchToChrome(keyPressCount, keySequenceDetected) {
+        const bundleIdentifier = keySequenceDetected === true ? 'com.google.Chrome.canary' : 'com.google.Chrome',
+            appName = keySequenceDetected === true ? 'Google Chrome Canary' : 'Google Chrome';
 
+        Logger.log('ChromeVersionsAppSwitcher::switchToApp', `bundleId - ${bundleIdentifier}, appName - ${appName}`);
 
-    bundleIdentifier = ChromeVersionsAppSwitcher.doubleWasDetected ? 'com.google.Chrome.canary' :
-      'com.google.Chrome';
-    appName = ChromeVersionsAppSwitcher.doubleWasDetected ? 'Google Chrome Canary' : 'Google Chrome';
+        AppManager.instance.defaultAppSwitcher(appName, true, bundleIdentifier);
+    }
 
-    Logger.log('ChromeVersionsAppSwitcher::switchToApp', `doubleKeyDetected - ${ChromeVersionsAppSwitcher.doubleWasDetected}, bundleId - ${bundleIdentifier}, appName - ${appName}`)
+    switchToApp(appName, launch = true, bundleIdentifier = "") {
 
-    AppManager.instance.defaultAppSwitcher(appName, launch, bundleIdentifier);
-  }
+        this._doubleKetDetector.detectProxy();
+
+    }
 
 
 
