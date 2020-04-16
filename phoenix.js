@@ -14,6 +14,7 @@ require('./helpers/appManager.js');
 require('./helpers/appSwitchers/baseAppSwitcher.js');
 require('./helpers/appSwitchers/finder.js');
 require('./helpers/appSwitchers/chrome.js');
+require('./helpers/appSwitchers/im.js');
 
 require('./helpers/cmd.js');
 
