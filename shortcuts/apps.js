@@ -28,7 +28,8 @@ const handler = (appName, launch, bid) => {
 
 appManager.registerAppSwitcher('com.apple.finder', new FinderAppSwitcher());
 appManager.registerAppSwitcher('com.google.Chrome*', new ChromeVersionsAppSwitcher());
-appManager.registerAppSwitcher('*', new ImSwitcher());
+appManager.registerAppSwitcher('WhatsApp', new ImSwitcher());
+appManager.registerAppSwitcher('Telegram', new ImSwitcher());
 
 
 const ed = new EventDispatcher();
