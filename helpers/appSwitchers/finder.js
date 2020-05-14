@@ -81,7 +81,7 @@ class FinderAppSwitcher extends BaseAppSwitcher {
         let script = `
             tell application "Finder"
                 if (count Finder windows) = 0 then
-                make new Finder window to (new window target of Finder preferences)
+                    make new Finder window to (new window target of Finder preferences)
                 end if
                 activate (get the index of front Finder window)
                 select the first item of front Finder window
@@ -91,10 +91,10 @@ class FinderAppSwitcher extends BaseAppSwitcher {
         let doubleKeyScript = `
             tell application "Finder"
                 if (count Finder windows) = 0 then
-                make new Finder window to (new window target of Finder preferences)
-                make new Finder window to (new window target of Finder preferences)
+                    make new Finder window to (new window target of Finder preferences)
+                    make new Finder window to (new window target of Finder preferences)
                 else if (count Finder windows) = 1 then
-                make new Finder window to (new window target of Finder preferences)
+                    make new Finder window to (new window target of Finder preferences)
                 end if
                 
                 activate (get the index of front Finder window)

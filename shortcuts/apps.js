@@ -4,7 +4,7 @@ const switchers = [
     ['T', HYPER, ['iTerm']],
     ['P', HYPER, ['PhpStorm']],
     ['O', HYPER, ['WebStorm']],
-    ['P', HYPER_SHIFT, ['GoLand']],
+    ['P', HYPER_SHIFT, ['Postman']],
     ['V', HYPER, ['Code']],
     ['R', HYPER, ['Microsoft Remote Desktop']],
     ['f12', HYPER, ['Activity Monitor']]
