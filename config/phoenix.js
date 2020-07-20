@@ -1,6 +1,6 @@
 /* CONFIG */
 
 Phoenix.set({
-  daemon: true,
-  openAtLogin: true
+    daemon: false,
+    openAtLogin: true
 });

@@ -7,11 +7,13 @@ const switchers = [
     ['P', HYPER_SHIFT, ['Postman']],
     ['V', HYPER, ['Code']],
     ['R', HYPER, ['Microsoft Remote Desktop']],
+    ['F', HYPER, ['Commander One']],
+    ['K', HYPER, ['Safari']],
     ['f12', HYPER, ['Activity Monitor']]
 ];
 
 const repetitiveSwitchers = [
-    ['F', HYPER, ['Finder', true, 'com.apple.finder']],
+    // ['F', HYPER, ['Finder', true, 'com.apple.finder']],
     ['C', HYPER, ['Google Chrome', true, 'com.google.Chrome']],
     ['M', HYPER, ['WhatsApp', true]], // Switching to WhatsApp and Telegram
 ];
@@ -26,7 +28,7 @@ const handler = (appName, launch, bid) => {
 };
 
 
-appManager.registerAppSwitcher('com.apple.finder', new FinderAppSwitcher());
+// appManager.registerAppSwitcher('com.apple.finder', new FinderAppSwitcher());
 appManager.registerAppSwitcher('com.google.Chrome*', new ChromeVersionsAppSwitcher());
 appManager.registerAppSwitcher('WhatsApp', new ImSwitcher());
 appManager.registerAppSwitcher('Telegram', new ImSwitcher());
