@@ -3,7 +3,9 @@ class WindowManager {
 
     /** @param {Window} window */
     centerWindow(window) {
-        const screen = window.screen(), sFrame = screen.frame(), wFrame = window.frame();
+        const screen = window.screen(),
+            sFrame = screen.frame(),
+            wFrame = window.frame();
         window.setFrame({
             x: sFrame.x + (sFrame.width / 2) - (wFrame.width / 2),
             y: Math.max(0, sFrame.y) + (sFrame.height / 2) - (wFrame.height / 2),
@@ -24,7 +26,8 @@ class WindowManager {
     findWindow(windows = Window.all(), name = false, isNameOptional = false, title = false) {
         let fallback;
         for (let i = 0, l = windows.length; i < l; i++) {
-            const window = windows[i], windowTitle = window.title();
+            const window = windows[i],
+                windowTitle = window.title();
             if (!windowTitle)
                 continue; // Not a normal window
             const titleOK = !title || (title.test(windowTitle));
@@ -40,34 +43,34 @@ class WindowManager {
     }
 
     focusWindow(name = false, isNameOptional = false, title = false, launch = true, callback = _.noop) {
-        const space = Space.active(), window = findWindow(space.windows(), name, isNameOptional, title);
+        const space = Space.active(),
+            window = findWindow(space.windows(), name, isNameOptional, title);
         if (window) {
             window.unminimise();
             window.focus();
             callback(false);
-        }
-        else if (launch) {
+        } else if (launch) {
             if (_.isFunction(launch)) {
                 launch();
                 callback(true);
-            }
-            else if (_.isString(launch)) {
-                osascript(launch);
+            } else if (_.isString(launch)) {
+                Cmd.osascript(launch);
                 callback(true);
-            }
-            else if (name) {
-                const app = App.launch(name, { focus: true });
+            } else if (name) {
+                const app = App.launch(name, {
+                    focus: true
+                });
                 if (!app)
                     return;
                 /* CHECKING */
-                let checksNr = 0, maxChecksNr = FOCUS_WINDOW_CHECK_CYCLES;
+                let checksNr = 0,
+                    maxChecksNr = FOCUS_WINDOW_CHECK_CYCLES;
                 const intervalId = setInterval(() => {
                     const newWindow = findWindow(space.windows(), name, isNameOptional, title);
                     if (newWindow) {
                         clearInterval(intervalId);
                         callback(true);
-                    }
-                    else if (checksNr >= maxChecksNr) {
+                    } else if (checksNr >= maxChecksNr) {
                         alert(`Can't open new "${name}" window, provide some custom logic`);
                         clearInterval(intervalId);
                         callback(true);
@@ -81,7 +84,12 @@ class WindowManager {
     growFrame(x, y, width, height, window = Window.focused()) {
         if (!window)
             return;
-        const screen = Screen.main(), sFrame = screen.flippedFrame(), svFrame = screen.flippedVisibleFrame(), yUnusable = sFrame.height - svFrame.height, frame = window.frame(), newFrame = _.cloneDeep(frame);
+        const screen = Screen.main(),
+            sFrame = screen.flippedFrame(),
+            svFrame = screen.flippedVisibleFrame(),
+            yUnusable = sFrame.height - svFrame.height,
+            frame = window.frame(),
+            newFrame = _.cloneDeep(frame);
         //FIXME: We are leveraging the fact that in the current use case `x` and `y` are always negatives, while `width` and `height` are always positives
         if (x)
             newFrame.x = _.clamp(frame.x + x, sFrame.x, sFrame.x + sFrame.width);
@@ -99,7 +107,8 @@ class WindowManager {
             return this.setFrame(...this.getNamedFrame(x), y || window);
         if (!window)
             return;
-        const screen = window.screen(), frame = screen.flippedVisibleFrame();
+        const screen = window.screen(),
+            frame = screen.flippedVisibleFrame();
         window.setFrame({
             x: frame.x + (frame.width * x),
             y: frame.y + (frame.height * y),
@@ -109,36 +118,58 @@ class WindowManager {
     }
 
     getNamedFrame(name) {
-        const dTop = (TOP_HEIGHT_PERCENTAGE - 50) / 100, dLeft = (LEFT_WIDTH_PERCENTAGE - 50) / 100;
+        const dTop = (TOP_HEIGHT_PERCENTAGE - 50) / 100,
+            dLeft = (LEFT_WIDTH_PERCENTAGE - 50) / 100;
         switch (name) {
             /* SIDES */
-            case 'top': return [0, 0, 1, 0.5 + dTop];
-            case 'right': return [0.5 + dLeft, 0, 0.5 - dLeft, 1];
-            case 'bottom': return [0, 0.5 + dTop, 1, 0.5 - dTop];
-            case 'left': return [0, 0, 0.5 + dLeft, 1];
-            /* CORNERS */
-            case 'top-left': return [0, 0, 0.5 + dLeft, 0.5 + dTop];
-            case 'top-right': return [0.5 + dLeft, 0, 0.5 - dLeft, 0.5 + dTop];
-            case 'bottom-right': return [0.5 + dLeft, 0.5 + dTop, 0.5 - dLeft, 0.5 - dTop];
-            case 'bottom-left': return [0, 0.5 + dTop, 0.5 + dLeft, 0.5 - dTop];
-            /* HALVES */
-            case 'half-1': return [0, 0, 1 / 2, 1];
-            case 'half-2': return [1 / 2, 0, 1 / 2, 1];
-            /* THIRDS */
-            case 'third-1': return [0, 0, 1 / 3, 1];
-            case 'third-2': return [1 / 3, 0, 1 / 3, 1];
-            case 'third-3': return [2 / 3, 0, 1 / 3, 1];
-            /* SIXTHS */
-            case 'sixths-1': return [0, 0, 1 / 3, 1 / 2];
-            case 'sixths-2': return [1 / 3, 0, 1 / 3, 1 / 2];
-            case 'sixths-3': return [2 / 3, 0, 1 / 3, 1 / 2];
-            case 'sixths-4': return [0, 1 / 2, 1 / 3, 1 / 2];
-            case 'sixths-5': return [1 / 3, 1 / 2, 1 / 3, 1 / 2];
-            case 'sixths-6': return [2 / 3, 1 / 2, 1 / 3, 1 / 2];
-            /* EXTEND */
-            case 'extend': return [0, 0, 1, 1];
-            /* DEFAULT */
-            default: throw new Error(`Undefined frame named: "${name}"`);
+            case 'top':
+                return [0, 0, 1, 0.5 + dTop];
+            case 'right':
+                return [0.5 + dLeft, 0, 0.5 - dLeft, 1];
+            case 'bottom':
+                return [0, 0.5 + dTop, 1, 0.5 - dTop];
+            case 'left':
+                return [0, 0, 0.5 + dLeft, 1];
+                /* CORNERS */
+            case 'top-left':
+                return [0, 0, 0.5 + dLeft, 0.5 + dTop];
+            case 'top-right':
+                return [0.5 + dLeft, 0, 0.5 - dLeft, 0.5 + dTop];
+            case 'bottom-right':
+                return [0.5 + dLeft, 0.5 + dTop, 0.5 - dLeft, 0.5 - dTop];
+            case 'bottom-left':
+                return [0, 0.5 + dTop, 0.5 + dLeft, 0.5 - dTop];
+                /* HALVES */
+            case 'half-1':
+                return [0, 0, 1 / 2, 1];
+            case 'half-2':
+                return [1 / 2, 0, 1 / 2, 1];
+                /* THIRDS */
+            case 'third-1':
+                return [0, 0, 1 / 3, 1];
+            case 'third-2':
+                return [1 / 3, 0, 1 / 3, 1];
+            case 'third-3':
+                return [2 / 3, 0, 1 / 3, 1];
+                /* SIXTHS */
+            case 'sixths-1':
+                return [0, 0, 1 / 3, 1 / 2];
+            case 'sixths-2':
+                return [1 / 3, 0, 1 / 3, 1 / 2];
+            case 'sixths-3':
+                return [2 / 3, 0, 1 / 3, 1 / 2];
+            case 'sixths-4':
+                return [0, 1 / 2, 1 / 3, 1 / 2];
+            case 'sixths-5':
+                return [1 / 3, 1 / 2, 1 / 3, 1 / 2];
+            case 'sixths-6':
+                return [2 / 3, 1 / 2, 1 / 3, 1 / 2];
+                /* EXTEND */
+            case 'extend':
+                return [0, 0, 1, 1];
+                /* DEFAULT */
+            default:
+                throw new Error(`Undefined frame named: "${name}"`);
         }
     }
 }

@@ -99,18 +99,21 @@ class AppManager {
     }
 
     _reopenApp(appName) {
-        let script = `tell application "${appName}"
-            try
-                reopen
-                activate
-            on error
-                log "can not reopen the app"
-                activate
-            end
-        end`;
+        // let script = `tell application "${appName}"
+        //     try
+        //         reopen
+        //         activate
+        //     on error
+        //         log "can not reopen the app"
+        //         activate
+        //     end
+        // end`;
 
         Logger.log('AppManager::registerAppSwitcher', `making attempt to reopen app if any - ${appName}`);
-        Cmd.osascript(script);
+        // Cmd.osascript(script);
+        App.launch(appName, {
+            focus: true
+        });
 
     }
 
