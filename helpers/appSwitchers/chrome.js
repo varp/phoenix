@@ -6,8 +6,8 @@ class ChromeVersionsAppSwitcher extends BaseAppSwitcher {
     }
 
     _switchToChrome(keyPressCount, keySequenceDetected) {
-        const bundleIdentifier = keySequenceDetected === true ? 'com.google.Chrome' : 'com.google.Chrome.canary',
-            appName = keySequenceDetected === true ? 'Google Chrome' : 'Google Chrome Canary';
+        const bundleIdentifier = keySequenceDetected === true ? 'com.google.Chrome.canary' : 'com.google.Chrome',
+            appName = keySequenceDetected === true ? 'Google Chrome Canary' : 'Google Chrome';
 
         Logger.log('ChromeVersionsAppSwitcher::switchToApp', `bundleId - ${bundleIdentifier}, appName - ${appName}`);
 

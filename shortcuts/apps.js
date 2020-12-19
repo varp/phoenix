@@ -9,7 +9,7 @@ const switchers = [
     ['R', HYPER, ['Microsoft Remote Desktop']],
     ['F', HYPER, ['Commander One']],
     ['K', HYPER, ['Safari']],
-    ['f12', HYPER, ['Activity Monitor']]
+    ['F12', HYPER, ['Activity Monitor']]
 ];
 
 const repetitiveSwitchers = [
