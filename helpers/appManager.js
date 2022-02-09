@@ -30,7 +30,7 @@ class AppManager {
      *
      * @param {string} appName application name
      * @param {string} bundleIdentifier application bundle identifier
-     * 
+     *
      * @returns {App}
      */
     findApp(appName, bundleIdentifier = "") {
@@ -38,7 +38,7 @@ class AppManager {
 
         if (bundleIdentifier.length) {
             app = _.first(App.all().filter(a => {
-                return a.bundleIdentifier() === bundleIdentifier
+                return a.bundleIdentifier() === bundleIdentifier;
             }), false);
             Logger.log('AppManager::findApp', `by bundleId  - ${bundleIdentifier}, app - ${app}`);
             return app;
@@ -50,7 +50,7 @@ class AppManager {
     }
 
     switchToApp(appName, launch = true, bundleIdentifier = "") {
-        if (this._executeAppSwitcher(appName, launch, bundleIdentifier)) {
+        if (this._findAndExecuteAppSwitcher(appName, launch, bundleIdentifier)) {
             return;
         }
 
@@ -119,17 +119,31 @@ class AppManager {
 
     /**
      * Register application switcher
-     * 
-     * @param {string} appIdentifierPattern 
-     * @param {Function} switcher 
+     *
+     * @param {string} appIdentifierPattern
+     * @param {Function} switcher
      */
     registerAppSwitcher(appIdentifierPattern, switcher) {
         this.switchers = this.switchers || {};
-        this.switchers[appIdentifierPattern] = switcher;
+        this.switchers[appIdentifierPattern] = this._validateSwitcherType(switcher);
         Logger.log('AppManager::registerAppSwitcher', `registered switcher for app with bundleIdentifier - ${appIdentifierPattern}`);
     }
 
-    _executeAppSwitcher(appName, launch = true, bundleIdentifier = "") {
+    _validateSwitcherType(switcher) {
+        let type = typeof switcher;
+
+        if (type === 'function') {
+            return switcher;
+        }
+
+        if (type === 'object' && (switcher instanceof BaseAppSwitcher)) {
+            return switcher;
+        }
+
+        throw new TypeError("Custom switchers implemented as a class must be an instance of BaseAppSwitcher");
+    }
+
+    _findAndExecuteAppSwitcher(appName, launch = true, bundleIdentifier = "") {
 
         let switcher = this._findAppSwitcher(appName, bundleIdentifier);
 
@@ -137,39 +151,27 @@ class AppManager {
             return false;
         }
 
-        Logger.log('AppManager::registerAppSwitcher', `found a switcher for app with bundleIdentifier - ${bundleIdentifier}`);
+        Logger.log('AppManager::_findAndExecuteAppSwitcher', `found a switcher for app: ${appName || bundleIdentifier}`);
 
-        switch (typeof (switcher)) {
-            case "function":
-                Logger.log('AppManager::registerAppSwitcher', `executing switcher for app with bundleIdentifier - ${bundleIdentifier}`);
-                switcher.call(this, appName, launch, bundleIdentifier);
-                break;
-            case "object":
-                if (!(switcher instanceof BaseAppSwitcher)) {
-                    throw new TypeError("Custom switchers implemented as a class must be an instance of BaseAppSwitcher");
-                }
-                Logger.log('AppManager::registerAppSwitcher', `executing switcher for app with bundleIdentifier - ${bundleIdentifier}`);
-                switcher.switchToApp.call(switcher, appName, launch, bundleIdentifier);
-                break;
-            default:
-                throw new TypeError('invalid type of switcher');
+        let callable = switcher;
+        if (typeof switcher === 'object') {
+            callable = switcher.switchToApp;
         }
+        Logger.log('AppManager::_findAndExecuteAppSwitcher', `executing switcher for app: ${appName || bundleIdentifier}`);
+        callable.call(switcher, appName, launch, bundleIdentifier);
 
         return true;
     }
 
     _findAppSwitcher(appName, bundleIdentifier = "") {
-        let a = appName,
-            b = bundleIdentifier.length ? bundleIdentifier : null;
-
         const predicate = (e) => {
-            let _e = e.replace('*', '');
-            return a.includes(_e) || (b && b.includes(_e))
+            let _e = new RegExp(e);
+            return appName.match(_e) || bundleIdentifier.match(_e);
         };
 
         const switcher = _.get(this.switchers, _.keys(this.switchers).sort().find(predicate), null);
 
-        Logger.log('AppManager::_findAppSwitcher()', `appName - ${a}, bundleId - ${b}, switcher - ${switcher}`)
+        Logger.log('AppManager::_findAppSwitcher()', `appName | bundleId - ${appName || bundleIdentifier || null}, switcher - ${switcher}`);
 
         return switcher;
     }

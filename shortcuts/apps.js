@@ -3,13 +3,13 @@ const switchers = [
     ['D', HYPER, ['DataGrip']],
     ['T', HYPER, ['iTerm']],
     ['P', HYPER, ['PhpStorm']],
-    ['O', HYPER, ['WebStorm']],
+    ['O', HYPER, ['GoLand']],
     ['P', HYPER_SHIFT, ['Postman']],
-    ['V', HYPER, ['Code']],
+    ['V', HYPER, ['Visual Studio Code']],
     ['R', HYPER, ['Microsoft Remote Desktop']],
     ['F', HYPER, ['Commander One']],
-    ['K', HYPER, ['Safari']],
-    ['F12', HYPER, ['Activity Monitor']]
+    ['K', HYPER, ['Slack']],
+    ['f12', HYPER, ['Activity Monitor']]
 ];
 
 const repetitiveSwitchers = [
@@ -22,16 +22,12 @@ const repetitiveSwitchers = [
  * @type {AppManager}
  */
 let appManager = AppManager.instance;
-
 const handler = (appName, launch, bid) => {
     return appManager.switchToApp(appName, launch, bid);
 };
 
-
-// appManager.registerAppSwitcher('com.apple.finder', new FinderAppSwitcher());
-appManager.registerAppSwitcher('com.google.Chrome*', new ChromeVersionsAppSwitcher());
-appManager.registerAppSwitcher('WhatsApp', new ImSwitcher());
-appManager.registerAppSwitcher('Telegram', new ImSwitcher());
+appManager.registerAppSwitcher('com.google.Chrome.*', new ChromeVersionsAppSwitcher());
+appManager.registerAppSwitcher('(Telegram|WhatsApp)', new ImSwitcher());
 
 
 const ed = new EventDispatcher();
