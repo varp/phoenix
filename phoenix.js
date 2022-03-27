@@ -22,7 +22,7 @@ require('./shortcuts/center.js');
 require('./shortcuts/corners.js');
 require('./shortcuts/expand.js');
 
-require('./shortcuts/fullscreen.js');
+require('./shortcuts/expandOnNextScreen.js');
 require('./shortcuts/info.js');
 require('./shortcuts/grow.js');
 require('./shortcuts/halves.js');
