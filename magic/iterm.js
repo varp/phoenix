@@ -1,12 +1,13 @@
 /* HYPER */
 
-(new EventDispatcher()).setEventHandler('windowDidOpen', (window) => {
+const edI = new EventDispatcher();
+edI.setEventHandler('windowDidOpen', (window) => {
 
     if (!window.isNormal() || !window.isMain()) {
         return;
     }
 
-    const name = window.app().name(),
+     const name = window.app().name(),
         title = window.title();
 
     Logger.log(`Window name ${name}`);
@@ -14,7 +15,7 @@
         return;
     }
 
-    (new WindowManager()).setFrame('extend');
+    (new WindowManager()).setFrame('extend', window);
     window.maximize();
 
 });

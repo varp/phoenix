@@ -1,5 +1,5 @@
 const switchers = [
-    ['`', HYPER, ['Dash']],
+    ['`', HYPER, ['Notion']],
     ['D', HYPER, ['DataGrip']],
     ['T', HYPER, ['iTerm']],
     ['P', HYPER, ['PhpStorm']],

@@ -1,6 +1,8 @@
 /* LOG */
 
 Storage.set(DEBUG_MODE_KEY, true);
+
+
 class Logger {
 
     /**

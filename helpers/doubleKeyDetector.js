@@ -33,7 +33,7 @@ class DoubleKeyDetector {
 
         this._keyPressedCount++;
         if (this._keyPressedCount == 1) {
-            this._time = setTimeout(this._resolvePromise.bind(this), DOUBLE_KEY_INTERVAL + 200);
+            this._time = setTimeout(this._resolvePromise.bind(this), DOUBLE_KEY_INTERVAL);
         }
 
         Logger.log('DoubleKeyDetector::detectProxy', `timestamp: ${timestamp} lastTimestamp: ${this._lastKeyPressTimestamp} diff (ms): ${diff} times pressed: ${this._keyPressedCount}`);

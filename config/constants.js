@@ -12,7 +12,7 @@ const HANDLERS = [];
 
 const HYPER = ['ctrl', 'alt', 'cmd'];
 const HYPER_SHIFT = [...HYPER, 'shift'];
-const DOUBLE_KEY_INTERVAL = 850;
+const DOUBLE_KEY_INTERVAL = 250;
 
 /* OTHERS */
 
