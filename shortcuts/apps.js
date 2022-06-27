@@ -6,9 +6,8 @@ const switchers = [
     ['O', HYPER, ['GoLand']],
     ['P', HYPER_SHIFT, ['Postman']],
     ['V', HYPER, ['Visual Studio Code']],
-    ['R', HYPER, ['Microsoft Remote Desktop']],
     ['F', HYPER, ['Commander One']],
-    ['K', HYPER, ['Slack']],
+    ['K', HYPER, ['Microsoft Teams']],
     ['f12', HYPER, ['Activity Monitor']]
 ];
 
