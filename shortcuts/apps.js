@@ -14,7 +14,7 @@ const switchers = [
 const repetitiveSwitchers = [
     // ['F', HYPER, ['Finder', true, 'com.apple.finder']],
     ['C', HYPER, ['Google Chrome', true, 'com.google.Chrome']],
-    ['M', HYPER, ['WhatsApp', true]], // Switching to WhatsApp and Telegram
+    ['M', HYPER, ['Telegram', true]], // Switching to WhatsApp and Telegram
 ];
 
 /**
