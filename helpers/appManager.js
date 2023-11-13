@@ -58,6 +58,8 @@ class AppManager {
     }
 
     defaultAppSwitcher(appName, launch, bundleIdentifier) {
+        const op = 'AppManager.defaultAppSwitcher';
+
         let app = this.findApp(appName, bundleIdentifier);
 
         if (!app && launch) {
@@ -77,28 +79,32 @@ class AppManager {
             appWindows = app.windows(),
             appMainWindow = app.mainWindow();
 
-        if (!app.isActive()) {
-            app.activate();
-        }
+        Logger.log(op, `${appName} active - ${isAppActive} hidden - ${isAppHidden}`);
+
+        let res = null;
 
         if (app.isHidden()) {
-            app.show();
+            res = app.show();
         }
 
-        Logger.log(`AppManager::switchToApp app - ${appName} active - ${isAppActive} hidden - ${isAppHidden}`);
+        if (!app.isActive()) {
+            res = app.focus();
+            Logger.log(op, `${appName} result of focusing to the app - ${res}`);
+        }
 
-
-        let res = app.focus();
-        Logger.log(`AppManager::switchToApp app - ${appName} result of focusing to the app - ${res}`);
+        if (appMainWindow) {
+            res = appMainWindow.raise();
+            Logger.log(op, `${appName} result of raising to the app mainWindow - ${res}`);
+        }
 
         if (appWindows.length === 0) {
             this._reopenApp(appName);
-
-            Logger.log(`AppManager::switchToApp app - ${appName} result of focusing to the app's main window - ${res}`);
+            Logger.log(op, `${appName} result of focusing to the app's main window - ${res}`);
         }
     }
 
     _reopenApp(appName) {
+        const op = 'AppManager._reopenApp';
         // let script = `tell application "${appName}"
         //     try
         //         reopen
@@ -109,7 +115,7 @@ class AppManager {
         //     end
         // end`;
 
-        Logger.log('AppManager::registerAppSwitcher', `making attempt to reopen app if any - ${appName}`);
+        Logger.log(op, `making attempt to reopen app if any - ${appName}`);
         // Cmd.osascript(script);
         App.launch(appName, {
             focus: true

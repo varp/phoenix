@@ -20,6 +20,13 @@ class Logger {
         }
     }
 
+    static log(op, ...data) {
+        if (Storage.get(DEBUG_MODE_KEY) === true) {
+            data.unshift(`DEBUG: ${op}: `)
+            console.log(...data);
+        }
+    }
+
     static expandFrame(frame, name) {
         const data = [`Frame ${name}:`, 'x', frame.x, 'y', frame.y, 'width', frame.width, 'height', frame.height];
         return data.join(' ');

@@ -1,5 +1,5 @@
 const switchers = [
-    ['`', HYPER, ['Notion']],
+    ['N', HYPER, ['Obsidian']],
     ['D', HYPER, ['DataGrip']],
     ['T', HYPER, ['iTerm']],
     ['P', HYPER, ['PhpStorm']],
@@ -7,7 +7,7 @@ const switchers = [
     ['P', HYPER_SHIFT, ['Postman']],
     ['V', HYPER, ['Visual Studio Code']],
     ['F', HYPER, ['Commander One']],
-    ['K', HYPER, ['Microsoft Teams']],
+    ['K', HYPER, ['pachca']],
     ['f12', HYPER, ['Activity Monitor']]
 ];
 

@@ -18,21 +18,21 @@ require('./helpers/appSwitchers/im.js');
 
 require('./helpers/cmd.js');
 
-require('./shortcuts/center.js');
-require('./shortcuts/corners.js');
-require('./shortcuts/expand.js');
+// require('./shortcuts/center.js');
+// require('./shortcuts/corners.js');
+// require('./shortcuts/expand.js');
 
-require('./shortcuts/expandOnNextScreen.js');
-require('./shortcuts/grow.js');
-require('./shortcuts/halves.js');
-require('./shortcuts/sides.js');
-require('./shortcuts/spaces.js');
-require('./shortcuts/sixths.js');
-require('./shortcuts/split_view.js');
-require('./shortcuts/thirds.js');
+// require('./shortcuts/expandOnNextScreen.js');
+// require('./shortcuts/grow.js');
+// require('./shortcuts/halves.js');
+// require('./shortcuts/sides.js');
+// require('./shortcuts/spaces.js');
+// require('./shortcuts/sixths.js');
+// require('./shortcuts/split_view.js');
+// require('./shortcuts/thirds.js');
 
-require('./shortcuts/info.js');
-require('./shortcuts/pause.js');
+// require('./shortcuts/info.js');
+// require('./shortcuts/pause.js');
 require('./shortcuts/quit.js');
 require('./shortcuts/reload.js');
 require('./shortcuts/restart.js');
@@ -44,6 +44,7 @@ require('./magic/finder.js');
 require('./magic/iterm.js');
 require('./magic/terminal.js');
 require('./magic/vscode.js');
+// require('./magic/dialogs.js');
 
 /* LOADED */
 
