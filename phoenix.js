@@ -1,6 +1,6 @@
 /* IMPORT */
 
-require('./config/phoenix.js');
+// require('./config/phoenix.js');
 require('./config/constants.js');
 
 require('./helpers/logger.js');
@@ -8,7 +8,7 @@ require('./helpers/alert.js');
 require('./helpers/doubleKeyDetector.js');
 require('./helpers/windowManager.js');
 require('./helpers/eventDispatcher.js');
-require('./helpers/spaceManager.js');
+// require('./helpers/spaceManager.js');
 
 require('./helpers/appManager.js');
 require('./helpers/appSwitchers/baseAppSwitcher.js');
@@ -22,7 +22,7 @@ require('./helpers/cmd.js');
 // require('./shortcuts/corners.js');
 // require('./shortcuts/expand.js');
 
-// require('./shortcuts/expandOnNextScreen.js');
+require('./shortcuts/expandOnNextScreen.js');
 // require('./shortcuts/grow.js');
 // require('./shortcuts/halves.js');
 // require('./shortcuts/sides.js');
@@ -39,11 +39,11 @@ require('./shortcuts/restart.js');
 
 require('./shortcuts/apps.js');
 
-require('./magic/chrome.js');
-require('./magic/finder.js');
-require('./magic/iterm.js');
-require('./magic/terminal.js');
-require('./magic/vscode.js');
+// require('./magic/chrome.js');
+// require('./magic/finder.js');
+// require('./magic/iterm.js');
+// require('./magic/terminal.js');
+// require('./magic/vscode.js');
 // require('./magic/dialogs.js');
 
 /* LOADED */
