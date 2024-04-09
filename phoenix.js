@@ -22,7 +22,7 @@ require('./helpers/cmd.js');
 // require('./shortcuts/corners.js');
 // require('./shortcuts/expand.js');
 
-require('./shortcuts/expandOnNextScreen.js');
+// require('./shortcuts/expandOnNextScreen.js');
 // require('./shortcuts/grow.js');
 // require('./shortcuts/halves.js');
 // require('./shortcuts/sides.js');
