@@ -7,9 +7,6 @@ edI.setEventHandler('windowDidOpen', (window) => {
     const name = window.app().name(),
         title = window.title();
 
-    Logger.log(`${op}`, 'window name', name, 'title', title);
-
-
     if (!window.isNormal() || !window.isMain()) {
         return;
     }
@@ -18,6 +15,7 @@ edI.setEventHandler('windowDidOpen', (window) => {
         return;
     }
 
+    Logger.log(`${op}`, 'window name', name, 'title', title);
     window.maximize();
 });
 
