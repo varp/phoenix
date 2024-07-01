@@ -25,8 +25,9 @@ const handler = (appName, launch, bid) => {
     return appManager.switchToApp(appName, launch, bid);
 };
 
-appManager.registerAppSwitcher('com.google.Chrome.*', new ChromeVersionsAppSwitcher());
+// appManager.registerAppSwitcher('com\.google\.Chrome.*', new ChromeVersionsAppSwitcher());
 appManager.registerAppSwitcher('(Telegram|WhatsApp)', new ImSwitcher());
+// appManager.registerAppSwitcher('.*', new CycleWindow(AppManager.instance));
 
 
 const ed = new EventDispatcher();

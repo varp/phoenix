@@ -22,6 +22,8 @@ class AppManager {
     constructor(enforcer) {
         if (enforcer !== singletonEnforcer)
             throw "Instantiation failed: use Singleton.getInstance() instead of new.";
+
+        this.windows ||= {}
     }
 
     /**
@@ -66,17 +68,22 @@ class AppManager {
             app = App.launch(appName, {
                 focus: true
             });
-        }
 
-        if (typeof app === 'undefined') {
-            (new Alert()).show(`Can not launch the '${appName}' application.`, App.get('Phoenix').icon());
+            if (app === undefined) {
+                (new Alert()).show(`Can not launch the '${appName}' application.`, App.get('Phoenix').icon());
+                return;
+            }
+
             return;
         }
 
 
         let isAppActive = app.isActive(),
             isAppHidden = app.isHidden(),
-            appWindows = app.windows(),
+        // app.windows() returns only windows on the current display 
+        // TODO: collect and save windows from all displays and update periodically
+            appWindows = app.windows(), 
+            appWindowsLength = appWindows.length,
             appMainWindow = app.mainWindow();
 
         Logger.log(op, `${appName} active - ${isAppActive} hidden - ${isAppHidden}`);
@@ -92,15 +99,47 @@ class AppManager {
             Logger.log(op, `${appName} result of focusing to the app - ${res}`);
         }
 
-        if (appMainWindow) {
-            res = appMainWindow.raise();
-            Logger.log(op, `${appName} result of raising to the app mainWindow - ${res}`);
+        // if (appMainWindow) {
+        //     res = appMainWindow.raise();
+        //     Logger.log(op, `${appName} result of raising to the app mainWindow - ${res}`);
+        // }
+
+        // if (appWindows.length === 0) {
+        //     this._reopenApp(appName);
+        //     Logger.log(op, `${appName} result of focusing to the app's main window - ${res}`);
+        // }
+
+        if (appWindowsLength === 0) {
+            app.mainWindow().focus();
+            return;
         }
 
-        if (appWindows.length === 0) {
-            this._reopenApp(appName);
-            Logger.log(op, `${appName} result of focusing to the app's main window - ${res}`);
+        let w = this.windows[app.hash()];
+        if (w === undefined) {
+            w = this.windows[app.hash()] = {
+                lastActiveWindowIndex: 0,
+                lastActiveWindowHash: appMainWindow.hash()
+            }
         }
+
+        Logger.log(op, 'w.lastActiveWindowIndex', w.lastActiveWindowIndex,
+            'w.lastActiveWindowHash', w.lastActiveWindowHash, 'appWindowsLength', appWindowsLength);
+
+        let nextWindowIndex = ((w.lastActiveWindowIndex + 1) % appWindowsLength + appWindowsLength) % appWindowsLength || 0;
+        if (w.lastActiveWindowHash === appWindows[nextWindowIndex].hash()) {
+            Logger.log(op, 'recalculating next window index because of hash equality');
+            nextWindowIndex = ((appWindowsLength - 1) % appWindowsLength + appWindowsLength) % appWindowsLength || 0;
+        }
+
+        Logger.log(op, 'nextWindowIndex', nextWindowIndex);
+
+        const nextWindow = appWindows[nextWindowIndex];
+        res = nextWindow.focus();
+
+        Logger.log(op, appName, 'result of focusing to the app window', res);
+
+        w.lastActiveWindowIndex = nextWindowIndex;
+        w.lastActiveWindowHash = nextWindow.hash();
     }
 
     _reopenApp(appName) {
@@ -170,9 +209,9 @@ class AppManager {
     }
 
     _findAppSwitcher(appName, bundleIdentifier = "") {
-        const predicate = (e) => {
-            let _e = new RegExp(e);
-            return appName.match(_e) || bundleIdentifier.match(_e);
+        const predicate = (item) => {
+            let r = new RegExp(item);
+            return appName.match(r) || bundleIdentifier.match(r);
         };
 
         const switcher = _.get(this.switchers, _.keys(this.switchers).sort().find(predicate), null);
