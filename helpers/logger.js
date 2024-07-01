@@ -10,19 +10,12 @@ class Logger {
      * is in the Storage (~/Library/Application Support/Phoenix/storage.json) 
      * value with `PHOENIX_DEBUG_KEY` set to `true`;
      * 
+     * @param {string} operation/prefix
      * @param  {...any} data  Data to be logged
      */
-    static log(...data) {
-
-        if (Storage.get(DEBUG_MODE_KEY) === true) {
-            data.unshift("DEBUG:");
-            console.log(...data);
-        }
-    }
-
     static log(op, ...data) {
         if (Storage.get(DEBUG_MODE_KEY) === true) {
-            data.unshift(`DEBUG: ${op}: `)
+            data.unshift(`DEBUG: ${op}:`)
             console.log(...data);
         }
     }

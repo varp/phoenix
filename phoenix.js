@@ -41,7 +41,7 @@ require('./shortcuts/apps.js');
 
 // require('./magic/chrome.js');
 // require('./magic/finder.js');
-// require('./magic/iterm.js');
+require('./magic/iterm.js');
 // require('./magic/terminal.js');
 // require('./magic/vscode.js');
 // require('./magic/dialogs.js');
