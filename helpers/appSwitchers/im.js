@@ -6,7 +6,7 @@ class ImSwitcher extends BaseAppSwitcher {
     }
 
     _switchToIm(keyPressCount, keySequenceDetected) {
-        const appName = keySequenceDetected === true ? 'Telegram' : 'WhatsApp';
+        const appName = keySequenceDetected === true ? 'WhatsApp' : 'Telegram';
 
         Logger.log('ImSwitcher::switchToApp', `appName - ${appName}`);
 

@@ -1,21 +1,20 @@
 const switchers = [
-    ['`', HYPER, ['Dash']],
+    ['N', HYPER, ['Obsidian']],
     ['D', HYPER, ['DataGrip']],
     ['T', HYPER, ['iTerm']],
     ['P', HYPER, ['PhpStorm']],
     ['O', HYPER, ['GoLand']],
     ['P', HYPER_SHIFT, ['Postman']],
     ['V', HYPER, ['Visual Studio Code']],
-    ['R', HYPER, ['Microsoft Remote Desktop']],
     ['F', HYPER, ['Commander One']],
-    ['K', HYPER, ['Slack']],
+    ['K', HYPER, ['pachca']],
     ['f12', HYPER, ['Activity Monitor']]
 ];
 
 const repetitiveSwitchers = [
     // ['F', HYPER, ['Finder', true, 'com.apple.finder']],
     ['C', HYPER, ['Google Chrome', true, 'com.google.Chrome']],
-    ['M', HYPER, ['WhatsApp', true]], // Switching to WhatsApp and Telegram
+    ['M', HYPER, ['Telegram', true]], // Switching to WhatsApp and Telegram
 ];
 
 /**

@@ -9,7 +9,7 @@ const expansionCache = {};
 
   if (!window) return;
 
-  const screen = Screen.main(),
+  const screen = window.screen(),
     sFrame = screen.flippedVisibleFrame(),
     hash = window.hash(),
     currFrame = window.frame(),
