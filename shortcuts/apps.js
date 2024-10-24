@@ -7,7 +7,7 @@ const switchers = [
     ['P', HYPER_SHIFT, ['Postman']],
     ['V', HYPER, ['Visual Studio Code']],
     ['F', HYPER, ['Commander One']],
-    ['K', HYPER, ['pachca']],
+    ['K', HYPER, ['Chatzone']],
     ['f12', HYPER, ['Activity Monitor']]
 ];
 
