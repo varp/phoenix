@@ -1,12 +1,12 @@
 const switchers = [
     ['N', HYPER, ['Obsidian']],
     ['D', HYPER, ['DataGrip']],
-    ['T', HYPER, ['iTerm']],
+    ['T', HYPER, ['Wezterm']],
     ['P', HYPER, ['PhpStorm']],
     ['O', HYPER, ['GoLand']],
     ['P', HYPER_SHIFT, ['Postman']],
     ['V', HYPER, ['Visual Studio Code']],
-    ['F', HYPER, ['Commander One']],
+    // ['F', HYPER, ['Finder']], // replace with creation of new Finder window
     ['K', HYPER, ['pachca']],
     ['f12', HYPER, ['Activity Monitor']]
 ];
