@@ -2,7 +2,6 @@ const switchers = [
     ['N', HYPER, ['Obsidian']],
     ['D', HYPER, ['DataGrip']],
     ['T', HYPER, ['Wezterm']],
-    ['T', HYPER, ['Wezterm']],
     ['P', HYPER, ['PhpStorm']],
     ['O', HYPER, ['GoLand']],
     ['P', HYPER_SHIFT, ['Postman']],
