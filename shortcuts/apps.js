@@ -8,6 +8,7 @@ const switchers = [
     ['V', HYPER, ['Visual Studio Code']],
     // ['F', HYPER, ['Finder']], // replace with creation of new Finder window
     ['K', HYPER, ['Chatzone']],
+    [';', HYPER, ['DevDocs']],
     ['f12', HYPER, ['Activity Monitor']]
 ];
 
