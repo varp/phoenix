@@ -11,7 +11,7 @@
     "@types/phoenix": "github:mafredri/phoenix-typings#master",
     "node": "^12.16.0",
     "typescript": "^3.8.2",
-    "jshint": "^2.11.0"
+    "jshint": "^2.13.6"
   },
   "dependencies": {}
 }
