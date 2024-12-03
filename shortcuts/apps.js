@@ -1,21 +1,18 @@
 const switchers = [
-    ['N', HYPER, ['Obsidian']],
-    ['D', HYPER, ['DataGrip']],
-    ['T', HYPER, ['Wezterm']],
-    ['P', HYPER, ['PhpStorm']],
-    ['O', HYPER, ['GoLand']],
-    ['P', HYPER_SHIFT, ['Postman']],
-    ['V', HYPER, ['Visual Studio Code']],
-    // ['F', HYPER, ['Finder']], // replace with creation of new Finder window
-    ['K', HYPER, ['Chatzone']],
+    ['J', HYPER, ['GoLand']],
+    ['K', HYPER, ['Wezterm']],
+    ['L', HYPER, ['DataGrip']],
     [';', HYPER, ['DevDocs']],
+    ['H', HYPER, ['Visual Studio Code']],
+    ['P', HYPER, ['Postman']],
+    [',', HYPER, ['Chatzone']],
+    ['.', HYPER, ['Obsidian']],
     ['f12', HYPER, ['Activity Monitor']]
 ];
 
 const repetitiveSwitchers = [
-    // ['F', HYPER, ['Finder', true, 'com.apple.finder']],
-    ['C', HYPER, ['Google Chrome', true, 'com.google.Chrome']],
-    ['M', HYPER, ['Telegram', true]], // Switching to WhatsApp and Telegram
+    ['M', HYPER, ['Google Chrome', true, 'com.google.Chrome']],
+    // ['M', HYPER, ['Telegram', true]], // Switching to WhatsApp and Telegram
 ];
 
 /**
