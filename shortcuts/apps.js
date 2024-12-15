@@ -4,7 +4,7 @@ const switchers = [
     ['L', HYPER, ['DataGrip']],
     [';', HYPER, ['DevDocs']],
     ['H', HYPER, ['Visual Studio Code']],
-    ['P', HYPER, ['Postman']],
+    ['P', HYPER_SHIFT, ['Postman']],
     [',', HYPER, ['Chatzone']],
     ['.', HYPER, ['Obsidian']],
     ['f12', HYPER, ['Activity Monitor']]
