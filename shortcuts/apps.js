@@ -1,6 +1,6 @@
 const switchers = [
     ['J', HYPER, ['GoLand']],
-    ['K', HYPER, ['Wezterm']],
+    ['K', HYPER, ['Ghostty']],
     ['L', HYPER, ['DataGrip']],
     [';', HYPER, ['DevDocs']],
     ['H', HYPER, ['Visual Studio Code']],
