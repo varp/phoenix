@@ -1,11 +1,11 @@
 const switchers = [
     ['J', HYPER, ['GoLand']],
-    ['K', HYPER, ['Wezterm']],
+    ['K', HYPER, ['Ghostty']],
     ['L', HYPER, ['DataGrip']],
     [';', HYPER, ['DevDocs']],
     ['H', HYPER, ['Visual Studio Code']],
     ['P', HYPER_SHIFT, ['Postman']],
-    ['M', HYPER, ['Google Chrome']],
+    ['M', HYPER, ['Zen Browser']],
     [',', HYPER, ['Chatzone']],
     ['.', HYPER, ['Obsidian']],
     ['f12', HYPER, ['Activity Monitor']]
