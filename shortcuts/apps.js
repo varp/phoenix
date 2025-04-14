@@ -4,7 +4,6 @@ const switchers = [
     ['L', HYPER, ['DataGrip']],
     [';', HYPER, ['DevDocs']],
     ['H', HYPER, ['Visual Studio Code']],
-    ['P', HYPER_SHIFT, ['Postman']],
     ['M', HYPER, ['Zen Browser']],
     ['N', HYPER, ['Google Chrome']],
     [',', HYPER, ['Chatzone']],
