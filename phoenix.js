@@ -21,6 +21,7 @@ require('./helpers/cmd.js');
 // require('./shortcuts/center.js');
 // require('./shortcuts/corners.js');
 // require('./shortcuts/expand.js');
+require('./shortcuts/reposition.js');
 
 // require('./shortcuts/expandOnNextScreen.js');
 // require('./shortcuts/grow.js');
@@ -41,7 +42,7 @@ require('./shortcuts/apps.js');
 
 // require('./magic/chrome.js');
 // require('./magic/finder.js');
-require('./magic/iterm.js');
+// require('./magic/iterm.js');
 // require('./magic/terminal.js');
 // require('./magic/vscode.js');
 // require('./magic/dialogs.js');
