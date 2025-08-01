@@ -3,7 +3,7 @@ const switchers = [
     ['K', HYPER, ['Ghostty']],
     ['L', HYPER, ['DataGrip']],
     [';', HYPER, ['DevDocs']],
-    ['H', HYPER, ['Visual Studio Code']],
+    ['H', HYPER, ['Neovide']],
     ['M', HYPER, ['Zen']],
     ['N', HYPER, ['Google Chrome']],
     [',', HYPER, ['Chatzone']],
