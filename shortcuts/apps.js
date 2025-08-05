@@ -1,14 +1,15 @@
 const switchers = [
-    ['J', HYPER, ['GoLand']],
-    ['K', HYPER, ['Ghostty']],
-    ['L', HYPER, ['DataGrip']],
-    [';', HYPER, ['DevDocs']],
-    ['H', HYPER, ['Neovide']],
-    ['M', HYPER, ['Zen']],
-    ['N', HYPER, ['Google Chrome']],
-    [',', HYPER, ['Chatzone']],
-    ['.', HYPER, ['Obsidian']],
-    ['f12', HYPER, ['Activity Monitor']]
+    ["J", HYPER, ["GoLand"]],
+    ["K", HYPER, ["Ghostty"]],
+    ["L", HYPER, ["DataGrip"]],
+    [";", HYPER, ["DevDocs"]],
+    ["H", HYPER, ["Neovide"]],
+    ["Y", HYPER, ["Zed"]],
+    ["M", HYPER, ["Zen"]],
+    ["N", HYPER, ["Google Chrome"]],
+    [",", HYPER, ["Chatzone"]],
+    [".", HYPER, ["Obsidian"]],
+    ["f12", HYPER, ["Activity Monitor"]],
 ];
 
 const repetitiveSwitchers = [
@@ -26,7 +27,6 @@ const handler = (appName, launch, bid) => {
 
 // appManager.registerAppSwitcher('com.google.Chrome.*', new ChromeVersionsAppSwitcher());
 // appManager.registerAppSwitcher('(Telegram|WhatsApp)', new ImSwitcher());
-
 
 const ed = new EventDispatcher();
 ed.setHandlers(handler, switchers);
