@@ -5,10 +5,11 @@ const switchers = [
     [";", HYPER, ["DevDocs"]],
     ["H", HYPER, ["Neovide"]],
     ["Y", HYPER, ["Zed"]],
+    ["U", HYPER, ["Code"]],
     ["M", HYPER, ["Zen"]],
     ["N", HYPER, ["Google Chrome"]],
     [",", HYPER, ["Chatzone"]],
-    [".", HYPER, ["Obsidian"]],
+    ["/", HYPER, ["Obsidian"]],
     ["f12", HYPER, ["Activity Monitor"]],
 ];
 
