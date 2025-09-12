@@ -39,6 +39,7 @@ require('./shortcuts/reload.js');
 require('./shortcuts/restart.js');
 
 require('./shortcuts/apps.js');
+require('./shortcuts/cycleWindows.js');
 
 // require('./magic/chrome.js');
 // require('./magic/finder.js');
