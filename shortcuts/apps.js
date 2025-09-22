@@ -1,7 +1,8 @@
 const switchers = [
     ["J", HYPER, ["GoLand"]],
     ["K", HYPER, ["Ghostty"]],
-    ["L", HYPER, ["DBeaver"]],
+    ["O", HYPER, ["DBeaver"]],
+    ["L", HYPER, ["DataGrip"]],
     [";", HYPER, ["DevDocs"]],
     ["H", HYPER, ["Neovide"]],
     ["Y", HYPER, ["Zed"]],
