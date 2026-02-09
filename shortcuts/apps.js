@@ -1,14 +1,19 @@
 const switchers = [
-    ["J", HYPER, ["GoLand"]],
+    ["J", HYPER, ["Neovide"]],
     ["K", HYPER, ["Ghostty"]],
-    ["O", HYPER, ["DBeaver"]],
-    ["L", HYPER, ["DataGrip"]],
+    ["O", HYPER, ["DataGrip"]],
+    ["L", HYPER, ["DBeaver"]],
     [";", HYPER, ["DevDocs"]],
-    ["H", HYPER, ["Neovide"]],
+    ["H", HYPER, ["Code"]],
     ["Y", HYPER, ["Zed"]],
-    ["U", HYPER, ["Code"]],
+    ["U", HYPER, ["Goland"]],
+
     ["M", HYPER, ["Google Chrome"]],
     ["N", HYPER, ["Google Chrome Canary"]],
+
+    ["A", HYPER, ["ChatGPT"]],
+    ["S", HYPER, ["Perplexity"]],
+
     [",", HYPER, ["Chatzone"]],
     ["/", HYPER, ["Obsidian"]],
     ["f12", HYPER, ["Activity Monitor"]],
