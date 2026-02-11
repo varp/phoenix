@@ -13,6 +13,7 @@ const switchers = [
 
     ["A", HYPER, ["ChatGPT"]],
     ["S", HYPER, ["Perplexity"]],
+    ["D", HYPER, ["Google Gemini"]],
 
     [",", HYPER, ["Chatzone"]],
     ["/", HYPER, ["Obsidian"]],
