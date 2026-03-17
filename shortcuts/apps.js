@@ -1,6 +1,6 @@
 const switchers = [
     ["J", HYPER, ["Neovide"]],
-    ["K", HYPER, ["Ghostty"]],
+    ["K", HYPER, ["cmux"]],
     ["O", HYPER, ["DataGrip"]],
     ["L", HYPER, ["DBeaver"]],
     [";", HYPER, ["DevDocs"]],
@@ -14,6 +14,7 @@ const switchers = [
     ["A", HYPER, ["ChatGPT"]],
     ["S", HYPER, ["Perplexity"]],
     ["D", HYPER, ["Google Gemini"]],
+    ["F", HYPER, ["Claude"]],
 
     [",", HYPER, ["Chatzone"]],
     ["/", HYPER, ["Obsidian"]],
