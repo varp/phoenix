@@ -4,8 +4,8 @@ const switchers = [
     ["O", HYPER, ["DataGrip"]],
     ["L", HYPER, ["DBeaver"]],
     [";", HYPER, ["DevDocs"]],
-    ["H", HYPER, ["Code"]],
-    ["Y", HYPER, ["Zed"]],
+    ["H", HYPER, ["Zed"]],
+    ["Y", HYPER, ["Code"]],
     ["U", HYPER, ["Goland"]],
 
     ["M", HYPER, ["Google Chrome"]],
